@@ -16,7 +16,7 @@ class CreateDailyReportsTable extends Migration
         Schema::create('daily_reports', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('title');
+            $table->string('title');
             $table->text('contents');
             $table->dateTime('reporting_time');
             $table->timestamps();
