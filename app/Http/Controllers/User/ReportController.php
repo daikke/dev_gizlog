@@ -26,6 +26,7 @@ class ReportController extends Controller
     public function create()
     {
         //
+        return view('user.daily_report.create');
     }
 
     /**
