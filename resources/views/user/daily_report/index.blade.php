@@ -21,12 +21,14 @@
         </tr>
       </thead>
       <tbody>
+        @foreach($daily_reports as $daily_report)
           <tr class="row">
-            <td class="col-xs-2"></td>
-            <td class="col-xs-3"></td>
-            <td class="col-xs-5"></td>
+            <td class="col-xs-2">{{ Carbon::createFromTimeString($daily_report->reporting_time)->format('m/d (D)') }}</td>
+            <td class="col-xs-3">{{ $daily_report->title }}</td>
+            <td class="col-xs-5">{{ $daily_report->contents }}</td>
             <td class="col-xs-2"><a class="btn" href=""><i class="fa fa-book"></i></a></td>
           </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
