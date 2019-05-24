@@ -4,14 +4,22 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\DailyReport;
 
-class ReportController extends Controller
+class DailyReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    protected $daily_report;
+
+    public function __construct(DailyReport $daily_report)
+    {
+        $this->daily_report = $daily_report;
+    }
+
     public function index()
     {
         //
@@ -38,6 +46,7 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**

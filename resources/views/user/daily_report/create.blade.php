@@ -4,7 +4,7 @@
 <h2 class="brand-header">日報作成</h2>
 <div class="main-wrap">
   <div class="container">
-    {!! Form::open(['route'=>'report.store']) !!}
+    {!! Form::open(['route'=>'daily_report.store']) !!}
       <input class="form-control" name="user_id" type="hidden">
       <div class="form-group form-size-small">
         {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y/m/d'),['class'=>'form-control']) !!}
