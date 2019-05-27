@@ -104,5 +104,7 @@ class DailyReportController extends Controller
     public function destroy($id)
     {
         //
+        $this->daily_report->where('id', $id)->delete();
+        return redirect()->to('daily_report');
     }
 }
