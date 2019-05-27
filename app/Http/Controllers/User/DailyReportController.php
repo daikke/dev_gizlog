@@ -15,24 +15,24 @@ class DailyReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $daily_report;
+    protected $dailyReport;
 
-    public function __construct(DailyReport $daily_report)
+    public function __construct(DailyReport $dailyReport)
     {
-        $this->daily_report = $daily_report;
+        $this->dailyReport = $dailyReport;
     }
 
     public function index(Request $request)
     {
         //
-        $search_report = $request->all();
-        if(!isset($search_report['search-month'])){
-            $daily_reports = $this->daily_report->orderBy('reporting_time', 'desc')->get();
-            return view('user.daily_report.index', compact('daily_reports'));
+        $searchReport = $request->all();
+        if(!isset($searchReport['search-month'])){
+            $dailyReports = $this->dailyReport->orderBy('reporting_time', 'desc')->get();
+            return view('user.daily_report.index', compact('dailyReports'));
         }else{
-            $search_day = new Carbon($search_report['search-month']);
-            $daily_reports = $this->daily_report->whereYear('reporting_time', $search_day->year)->whereMonth('reporting_time', $search_day->month)->orderBy('reporting_time', 'desc')->get();
-            return view('user.daily_report.index', compact('daily_reports'));
+            $searchDay = new Carbon($searchReport['search-month']);
+            $dailyReports = $this->dailyReport->whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
+            return view('user.daily_report.index', compact('dailyReports'));
         }
     }
 
@@ -56,7 +56,7 @@ class DailyReportController extends Controller
     public function store(DailyReportRequest $request)
     {
         $validated = $request->validated();
-        $this->daily_report->fill($validated)->save();
+        $this->dailyReport->fill($validated)->save();
         return redirect()->to('daily_report');
 
     }
@@ -70,8 +70,8 @@ class DailyReportController extends Controller
     public function show($id)
     {
         //
-        $daily_reports = $this->daily_report->where('id', $id)->first();
-        return view('user.daily_report.show', compact('daily_reports'));
+        $dailyReports = $this->dailyReport->where('id', $id)->first();
+        return view('user.daily_report.show', compact('dailyReports'));
     }
 
     /**
@@ -83,8 +83,8 @@ class DailyReportController extends Controller
     public function edit($id)
     {
         //
-        $daily_reports = $this->daily_report->where('id', $id)->first();
-        return view('user.daily_report.edit', compact('daily_reports'));
+        $dailyReports = $this->dailyReport->where('id', $id)->first();
+        return view('user.daily_report.edit', compact('dailyReports'));
     }
 
     /**
@@ -98,7 +98,7 @@ class DailyReportController extends Controller
     {
         //
         $validated = $request->validated();
-        $this->daily_report->where('id', $id)->update($validated);
+        $this->dailyReport->where('id', $id)->update($validated);
         return redirect()->to('daily_report');
     }
 
@@ -111,7 +111,7 @@ class DailyReportController extends Controller
     public function destroy($id)
     {
         //
-        $this->daily_report->where('id', $id)->delete();
+        $this->dailyReport->where('id', $id)->delete();
         return redirect()->to('daily_report');
     }
 }
