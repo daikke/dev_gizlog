@@ -76,6 +76,8 @@ class DailyReportController extends Controller
     public function edit($id)
     {
         //
+        $daily_reports = $this->daily_report->where('id', $id)->first();
+        return view('user.daily_report.edit', compact('daily_reports'));
     }
 
     /**
@@ -85,9 +87,12 @@ class DailyReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DailyReportRequest $request, $id)
     {
         //
+        $validated = $request->validated();
+        $this->daily_report->where('id', $id)->update($validated);
+        return redirect()->to('daily_report');
     }
 
     /**
