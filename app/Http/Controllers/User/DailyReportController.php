@@ -26,12 +26,12 @@ class DailyReportController extends Controller
     {
         //
         $searchReport = $request->all();
-        if(!isset($searchReport['search-month'])){
-            $dailyReports = $this->dailyReport->orderBy('reporting_time', 'desc')->get();
-            return view('user.daily_report.index', compact('dailyReports'));
-        }else{
+        if(isset($searchReport['search-month'])){
             $searchDay = new Carbon($searchReport['search-month']);
             $dailyReports = $this->dailyReport->whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
+            return view('user.daily_report.index', compact('dailyReports'));
+        }else{
+            $dailyReports = $this->dailyReport->orderBy('reporting_time', 'desc')->get();
             return view('user.daily_report.index', compact('dailyReports'));
         }
     }
