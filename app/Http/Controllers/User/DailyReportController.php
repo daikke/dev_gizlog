@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DailyReport;
 use App\Http\Requests\User\DailyReportRequest;
+use Illuminate\Support\Carbon;
 
 class DailyReportController extends Controller
 {
@@ -21,12 +22,18 @@ class DailyReportController extends Controller
         $this->daily_report = $daily_report;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         //
-        $daily_reports = $this->daily_report->orderBy('reporting_time', 'desc')->get();
-        return view('user.daily_report.index', compact('daily_reports'));
-
+        $search_report = $request->all();
+        if(!isset($search_report['search-month'])){
+            $daily_reports = $this->daily_report->orderBy('reporting_time', 'desc')->get();
+            return view('user.daily_report.index', compact('daily_reports'));
+        }else{
+            $search_day = new Carbon($search_report['search-month']);
+            $daily_reports = $this->daily_report->whereYear('reporting_time', $search_day->year)->whereMonth('reporting_time', $search_day->month)->orderBy('reporting_time', 'desc')->get();
+            return view('user.daily_report.index', compact('daily_reports'));
+        }
     }
 
     /**
