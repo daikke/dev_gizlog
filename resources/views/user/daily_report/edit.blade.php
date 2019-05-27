@@ -4,10 +4,10 @@
 <h1 class="brand-header">日報編集</h1>
 <div class="main-wrap">
   @if ($errors->has('user_id'))
-    <span class="help-block">{{$errors->first('user_id')}}</span>
+    <span class="help-block">{{ $errors->first('user_id') }}</span>
   @else
     <div class="container">
-      {!! Form::open(['route' => ['daily_report.update', $daily_reports->id], 'method' => 'PUT'])!!}
+      {!! Form::open(['route' => ['daily_report.update', $daily_reports->id], 'method' => 'PUT']) !!}
         <input class="form-control" name="user_id" type="hidden" value="{{ Auth::id() }}">
         @if ($errors->has('reporting_time'))
           <div class="form-group form-size-small has-error">

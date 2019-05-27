@@ -1,5 +1,6 @@
 @extends ('common.user')
 @section ('content')
+
 <h2 class="brand-header">日報一覧</h2>
 <div class="main-wrap">
   <div class="btn-wrapper daily-report">
@@ -20,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($daily_reports as $daily_report)
+        @foreach ($daily_reports as $daily_report)
           <tr class="row">
             <td class="col-xs-2">{{ Carbon::createFromTimeString($daily_report->reporting_time)->format('m/d (D)') }}</td>
             <td class="col-xs-3">{{ $daily_report->title }}</td>

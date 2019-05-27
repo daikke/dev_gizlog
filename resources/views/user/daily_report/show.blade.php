@@ -1,10 +1,11 @@
 @extends ('common.user')
 @section ('content')
+
 <h1 class="brand-header">日報詳細</h1>
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      2019/04/01 (Mon) の日報
+      {{ Carbon::createFromTimeString($daily_reports->reporting_time)->format('Y/m/d (D)') }}の日報
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
