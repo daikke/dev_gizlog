@@ -1,6 +1,5 @@
 @extends ('common.user')
 @section ('content')
-
 <h1 class="brand-header">日報詳細</h1>
 <div class="main-wrap">
   <div class="panel panel-success">
@@ -12,11 +11,11 @@
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text"></td>
+            <td class="td-text">{{ $daily_reports->title }}</td>
           </tr>
           <tr>
             <th class="table-column">Content</th>
-            <td class='td-text'></td>
+            <td class='td-text'>{{ $daily_reports->contents }}</td>
           </tr>
         </tbody>
       </table>

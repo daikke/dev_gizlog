@@ -63,6 +63,8 @@ class DailyReportController extends Controller
     public function show($id)
     {
         //
+        $daily_reports = $this->daily_report->where('id', $id)->first();
+        return view('user.daily_report.show', compact('daily_reports'));
     }
 
     /**
