@@ -33,7 +33,6 @@ class DailyReportRequest extends FormRequest
 
     public function messages()
     {
-        //
         return [
             'required' => '入力必須の項目です',
             'max' =>'255文字以内で入力してください',

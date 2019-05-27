@@ -24,7 +24,6 @@ class DailyReportController extends Controller
 
     public function index(Request $request)
     {
-        //
         $searchReport = $request->all();
         if (isset($searchReport['search-month'])) {
             $searchDay = new Carbon($searchReport['search-month']);
@@ -43,7 +42,6 @@ class DailyReportController extends Controller
      */
     public function create()
     {
-        //
         return view('user.daily_report.create');
     }
 
@@ -58,7 +56,6 @@ class DailyReportController extends Controller
         $validated = $request->validated();
         $this->dailyReport->fill($validated)->save();
         return redirect()->to('daily_report');
-
     }
 
     /**
@@ -69,7 +66,6 @@ class DailyReportController extends Controller
      */
     public function show($id)
     {
-        //
         $dailyReports = $this->dailyReport->where('id', $id)->first();
         return view('user.daily_report.show', compact('dailyReports'));
     }
@@ -82,7 +78,6 @@ class DailyReportController extends Controller
      */
     public function edit($id)
     {
-        //
         $dailyReports = $this->dailyReport->where('id', $id)->first();
         return view('user.daily_report.edit', compact('dailyReports'));
     }
@@ -96,7 +91,6 @@ class DailyReportController extends Controller
      */
     public function update(DailyReportRequest $request, $id)
     {
-        //
         $validated = $request->validated();
         $this->dailyReport->where('id', $id)->update($validated);
         return redirect()->to('daily_report');
@@ -110,7 +104,6 @@ class DailyReportController extends Controller
      */
     public function destroy($id)
     {
-        //
         $this->dailyReport->where('id', $id)->delete();
         return redirect()->to('daily_report');
     }
