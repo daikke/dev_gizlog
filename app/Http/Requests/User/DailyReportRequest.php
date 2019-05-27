@@ -15,7 +15,7 @@ class DailyReportRequest extends FormRequest
     {
       return true;
     }
-  
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,7 +30,7 @@ class DailyReportRequest extends FormRequest
             'user_id' => 'required'
         ];
     }
-  
+
     public function messages()
     {
         //
