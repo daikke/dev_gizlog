@@ -7,14 +7,14 @@
     <span class="help-block">{{ $errors->first('user_id') }}</span>
   @else
     <div class="container">
-      {!! Form::open(['route'=>'daily_report.store']) !!}
+      {!! Form::open(['route' => 'daily_report.store']) !!}
         {!! Form::input('hidden', 'user_id', Auth::id()) !!}
         @if ($errors->has('reporting_time'))
           <div class="form-group form-size-small has-error">
         @else
           <div class="form-group form-size-small">
         @endif
-            {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y-m-d'), ['class'=>'form-control form-require-input']) !!}
+            {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y-m-d'), ['class' => 'form-control form-require-input']) !!}
             <span class="help-block">{{ $errors->first('reporting_time') }}</span>
           </div>
         @if ($errors->has('title'))

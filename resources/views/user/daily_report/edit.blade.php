@@ -8,32 +8,32 @@
   @else
     <div class="container">
       {!! Form::open(['route' => ['daily_report.update', $daily_reports->id], 'method' => 'PUT']) !!}
-        <input class="form-control" name="user_id" type="hidden" value="{{ Auth::id() }}">
+        {!! Form::input('hidden', 'user_id', Auth::id(), ['class' => 'form-control']) !!}
         @if ($errors->has('reporting_time'))
           <div class="form-group form-size-small has-error">
         @else
           <div class="form-group form-size-small">
         @endif
-            <input class="form-control" name="reporting_time" type="date" value="{{ Carbon::createFromTimeString($daily_reports->reporting_time)->format('Y-m-d') }}">
-          <span class="help-block">{{ $errors->first('reporting_time') }}</span>
+            {!! Form::input('date', 'reporting_time', Carbon::createFromTimeString($daily_reports->reporting_time)->format('Y-m-d'), ['class' => 'form-control']) !!}
+            <span class="help-block">{{ $errors->first('reporting_time') }}</span>
           </div>
         @if ($errors->has('title'))
           <div class="form-group has-error">
         @else
           <div class="form-group">
         @endif
-            <input class="form-control" placeholder="{{ $daily_reports->title }}" name="title" type="text">
-          <span class="help-block">{{ $errors->first('title') }}</span>
+            {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => $daily_reports->title]) !!}
+            <span class="help-block">{{ $errors->first('title') }}</span>
           </div>
         @if ($errors->has('contents'))
           <div class="form-group has-error">
         @else
           <div class="form-group">
         @endif
-            <textarea class="form-control" placeholder="{{ $daily_reports->contents }}" name="contents" cols="50" rows="10"></textarea>
-          <span class="help-block">{{ $errors->first('contents') }}</span>
+            {!! Form::textarea('contents', null, ['class' => 'form-control', 'placeholder' => $daily_reports->contents]) !!}
+            <span class="help-block">{{ $errors->first('contents') }}</span>
           </div>
-        <button type="submit" class="btn btn-success pull-right">Update</button>
+        {!! Form::submit('Update', ['class' => 'btn btn-success pull-right']) !!}
       {!! Form::close() !!}
     </div>
   @endif
