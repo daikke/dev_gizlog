@@ -14,7 +14,7 @@
         @else
           <div class="form-group form-size-small">
         @endif
-            {!! Form::input('string', 'reporting_time', Carbon::now()->format('Y/m/d'), ['class'=>'form-control form-require-input']) !!}
+            {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y-m-d'), ['class'=>'form-control form-require-input']) !!}
             <span class="help-block">{{$errors->first('reporting_time')}}</span>
           </div>
         @if ($errors->has('title'))
