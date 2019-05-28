@@ -27,10 +27,10 @@ class DailyReportController extends Controller
         $searchReport = $request->all();
         if (isset($searchReport['search-month'])) {
             $searchDay = new Carbon($searchReport['search-month']);
-            $dailyReports = $this->dailyReport->whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
+            $dailyReports = $this->dailyReport->searchReport($searchDay);
             return view('user.daily_report.index', compact('dailyReports'));
         } else {
-            $dailyReports = $this->dailyReport->orderBy('reporting_time', 'desc')->get();
+            $dailyReports = $this->dailyReport->fetchReport();
             return view('user.daily_report.index', compact('dailyReports'));
         }
     }
@@ -66,7 +66,7 @@ class DailyReportController extends Controller
      */
     public function show($id)
     {
-        $dailyReports = $this->dailyReport->where('id', $id)->first();
+        $dailyReports = $this->dailyReport->find($id);
         return view('user.daily_report.show', compact('dailyReports'));
     }
 
@@ -78,7 +78,7 @@ class DailyReportController extends Controller
      */
     public function edit($id)
     {
-        $dailyReports = $this->dailyReport->where('id', $id)->first();
+        $dailyReports = $this->dailyReport->find($id);
         return view('user.daily_report.edit', compact('dailyReports'));
     }
 
@@ -92,7 +92,7 @@ class DailyReportController extends Controller
     public function update(DailyReportRequest $request, $id)
     {
         $validated = $request->validated();
-        $this->dailyReport->where('id', $id)->update($validated);
+        $this->dailyReport->find($id)->fill($validated)->save();
         return redirect()->to('daily_report');
     }
 
@@ -104,7 +104,7 @@ class DailyReportController extends Controller
      */
     public function destroy($id)
     {
-        $this->dailyReport->where('id', $id)->delete();
+        $this->dailyReport->find($id)->delete();
         return redirect()->to('daily_report');
     }
 }
