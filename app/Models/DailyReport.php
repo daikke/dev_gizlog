@@ -20,12 +20,12 @@ class DailyReport extends Model
 
     public function fetchReport()
     {
-        return DailyReport::orderBy('reporting_time', 'desc')->get();
+        return $this->orderBy('reporting_time', 'desc')->get();
     }
 
     public function searchReport($searchDay)
     {
-        return DailyReport::whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
+        return $this->whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
     }
 
 }
