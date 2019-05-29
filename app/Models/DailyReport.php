@@ -15,7 +15,6 @@ class DailyReport extends Model
         'reporting_time',
         'title',
         'contents',
-        'deleted_at'
     ];
 
     public function fetchReport()
