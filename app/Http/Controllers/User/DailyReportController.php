@@ -53,7 +53,7 @@ class DailyReportController extends Controller
      */
     public function store(DailyReportRequest $request)
     {
-        $validated = $request->validated();
+        $validated = $request->all();
         $this->dailyReport->fill($validated)->save();
         return redirect()->to('daily_report');
     }
