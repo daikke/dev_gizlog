@@ -10,18 +10,19 @@ use Illuminate\Support\Carbon;
 
 class DailyReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     protected $dailyReport;
 
     public function __construct(DailyReport $dailyReport)
     {
         $this->dailyReport = $dailyReport;
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request  $request
+     */
     public function index(Request $request)
     {
         $searchReport = $request->all();
@@ -47,7 +48,7 @@ class DailyReportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\User\DailyReportRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(DailyReportRequest $request)
@@ -84,7 +85,7 @@ class DailyReportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\User\DailyReportRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
