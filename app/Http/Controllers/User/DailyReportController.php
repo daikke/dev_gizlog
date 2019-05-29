@@ -28,11 +28,10 @@ class DailyReportController extends Controller
         if (isset($searchReport['search-month'])) {
             $searchDay = new Carbon($searchReport['search-month']);
             $dailyReports = $this->dailyReport->searchReport($searchDay);
-            return view('user.daily_report.index', compact('dailyReports'));
         } else {
             $dailyReports = $this->dailyReport->fetchReport();
-            return view('user.daily_report.index', compact('dailyReports'));
         }
+        return view('user.daily_report.index', compact('dailyReports'));
     }
 
     /**
