@@ -22,9 +22,9 @@ class DailyReport extends Model
         return $this->orderBy('reporting_time', 'desc')->get();
     }
 
-    public function searchReport($searchDay)
+    public function searchReport($searchMonth)
     {
-        return $this->whereYear('reporting_time', $searchDay->year)->whereMonth('reporting_time', $searchDay->month)->orderBy('reporting_time', 'desc')->get();
+        return $this->where('reporting_time', 'like', $searchMonth.'%')->orderBy('reporting_time', 'desc')->get();
     }
 
 }

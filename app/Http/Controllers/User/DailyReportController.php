@@ -27,8 +27,7 @@ class DailyReportController extends Controller
     {
         $searchReport = $request->all();
         if (isset($searchReport['search-month'])) {
-            $searchDay = new Carbon($searchReport['search-month']);
-            $dailyReports = $this->dailyReport->searchReport($searchDay);
+            $dailyReports = $this->dailyReport->searchReport($searchReport['search-month']);
         } else {
             $dailyReports = $this->dailyReport->fetchReport();
         }
