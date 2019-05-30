@@ -65,19 +65,19 @@ class DailyReportController extends Controller
      */
     public function show($id)
     {
-        $dailyReports = $this->dailyReport->find($id);
+        $dailyReport = $this->dailyReport->find($id);
         return view('user.daily_report.show', compact('dailyReports'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $dailyReports = $this->dailyReport->find($id);
+        $dailyReport = $this->dailyReport->find($id);
         return view('user.daily_report.edit', compact('dailyReports'));
     }
 
