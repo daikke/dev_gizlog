@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DailyReport extends Model
 {
-    //
     use SoftDeletes;
 
     protected $fillable = [
@@ -28,5 +27,4 @@ class DailyReport extends Model
                     ->orderBy('reporting_time', 'desc')
                     ->get();
     }
-
 }

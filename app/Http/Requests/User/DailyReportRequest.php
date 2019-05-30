@@ -30,6 +30,4 @@ class DailyReportRequest extends FormRequest
             'user_id' => 'required'
         ];
     }
-
 }
-

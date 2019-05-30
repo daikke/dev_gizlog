@@ -7,14 +7,14 @@
     <span class="help-block">{{ $errors->first('user_id') }}</span>
   @else
     <div class="container">
-      {!! Form::open(['route' => ['daily_report.update', $dailyReports->id], 'method' => 'PUT']) !!}
+      {!! Form::open(['route' => ['daily_report.update', $dailyReport->id], 'method' => 'PUT']) !!}
         {!! Form::input('hidden', 'user_id', Auth::id(), ['class' => 'form-control']) !!}
         @if ($errors->has('reporting_time'))
           <div class="form-group form-size-small has-error">
         @else
           <div class="form-group form-size-small">
         @endif
-            {!! Form::input('date', 'reporting_time', Carbon::createFromTimeString($dailyReports->reporting_time)->format('Y-m-d'), ['class' => 'form-control']) !!}
+            {!! Form::input('date', 'reporting_time', Carbon::createFromTimeString($dailyReport->reporting_time)->format('Y-m-d'), ['class' => 'form-control']) !!}
             <span class="help-block">{{ $errors->first('reporting_time') }}</span>
           </div>
         @if ($errors->has('title'))
@@ -22,7 +22,7 @@
         @else
           <div class="form-group">
         @endif
-            {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => $dailyReports->title]) !!}
+            {!! Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => $dailyReport->title]) !!}
             <span class="help-block">{{ $errors->first('title') }}</span>
           </div>
         @if ($errors->has('contents'))
@@ -30,7 +30,7 @@
         @else
           <div class="form-group">
         @endif
-            {!! Form::textarea('contents', null, ['class' => 'form-control', 'placeholder' => $dailyReports->contents]) !!}
+            {!! Form::textarea('contents', null, ['class' => 'form-control', 'placeholder' => $dailyReport->contents]) !!}
             <span class="help-block">{{ $errors->first('contents') }}</span>
           </div>
         {!! Form::submit('Update', ['class' => 'btn btn-success pull-right']) !!}
