@@ -26,11 +26,7 @@ class DailyReportController extends Controller
     public function index(Request $request)
     {
         $searchReport = $request->all();
-        if (isset($searchReport['search-month'])) {
-            $dailyReports = $this->dailyReport->searchReport($searchReport['search-month']);
-        } else {
-            $dailyReports = $this->dailyReport->fetchReport();
-        }
+        $dailyReports = $this->dailyReport->fetchReport($searchReport);
         return view('user.daily_report.index', compact('dailyReports'));
     }
 

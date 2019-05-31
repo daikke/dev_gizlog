@@ -16,15 +16,15 @@ class DailyReport extends Model
         'contents',
     ];
 
-    public function fetchReport()
+    public function fetchReport($searchReport)
     {
-        return $this->orderBy('reporting_time', 'desc')->get();
-    }
-
-    public function searchReport($searchMonth)
-    {
-        return $this->where('reporting_time', 'like', $searchMonth.'%')
-                    ->orderBy('reporting_time', 'desc')
-                    ->get();
+        if (isset($searchReport['search-month'])) {
+            $dailyReports = $this->where('reporting_time', 'like', $searchReport['search-month'] . '%')
+                                 ->orderBy('reporting_time', 'desc')
+                                 ->get();
+        } else {
+            $dailyReports = $this->orderBy('reporting_time', 'desc')->get();
+        }
+        return $dailyReports;
     }
 }
