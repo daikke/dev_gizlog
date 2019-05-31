@@ -16,6 +16,10 @@ class DailyReport extends Model
         'contents',
     ];
 
+    protected $dates = [
+        'reporting_time'
+    ];
+
     public function fetchReport($searchReport)
     {
         if (isset($searchReport['search-month'])) {
