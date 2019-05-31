@@ -8,7 +8,6 @@
   @else
     <div class="container">
       {!! Form::open(['route' => ['daily_report.update', $dailyReport->id], 'method' => 'PUT']) !!}
-        {!! Form::input('hidden', 'user_id', Auth::id(), ['class' => 'form-control']) !!}
         @if ($errors->has('reporting_time'))
           <div class="form-group form-size-small has-error">
         @else

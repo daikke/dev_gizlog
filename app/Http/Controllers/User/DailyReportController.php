@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DailyReport;
 use App\Http\Requests\User\DailyReportRequest;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DailyReportController extends Controller
 {
@@ -48,7 +48,7 @@ class DailyReportController extends Controller
      */
     public function store(DailyReportRequest $request)
     {
-        $validated = $request->all();
+        $validated = $request->all() + array('user_id' => Auth::id());
         $this->dailyReport->fill($validated)->save();
         return redirect()->to('daily_report');
     }
@@ -86,7 +86,7 @@ class DailyReportController extends Controller
      */
     public function update(DailyReportRequest $request, $id)
     {
-        $validated = $request->all();
+        $validated = $request->all() + array('user_id' => Auth::id());
         $this->dailyReport->find($id)->fill($validated)->save();
         return redirect()->to('daily_report');
     }
