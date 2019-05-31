@@ -86,7 +86,7 @@ class DailyReportController extends Controller
      */
     public function update(DailyReportRequest $request, $id)
     {
-        $validated = $request->validated();
+        $validated = $request->all();
         $this->dailyReport->find($id)->fill($validated)->save();
         return redirect()->to('daily_report');
     }
