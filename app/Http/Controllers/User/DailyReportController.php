@@ -48,7 +48,8 @@ class DailyReportController extends Controller
      */
     public function store(DailyReportRequest $request)
     {
-        $validated = $request->all() + array('user_id' => Auth::id());
+        $validated = $request->all();
+        $validated['user_id'] = Auth::id();
         $this->dailyReport->fill($validated)->save();
         return redirect()->to('daily_report');
     }
