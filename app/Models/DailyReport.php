@@ -23,12 +23,10 @@ class DailyReport extends Model
     public function fetchReport($searchReport)
     {
         if (isset($searchReport['search-month'])) {
-            $dailyReports = $this->where('reporting_time', 'like', $searchReport['search-month'] . '%')
-                                 ->orderBy('reporting_time', 'desc')
-                                 ->get();
+            $dailyReports = $this->where('reporting_time', 'like', $searchReport['search-month'] . '%');
         } else {
-            $dailyReports = $this->orderBy('reporting_time', 'desc')->get();
+            $dailyReports = $this;
         }
-        return $dailyReports;
+        return $dailyReports->orderBy('reporting_time', 'desc')->get();;
     }
 }
