@@ -119,8 +119,10 @@ class QuestionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $inputs = $request->all();
-        dd('successdelete'.$inputs['id']);
+        $arrayInputs = $request->all();
+        $this->question->find($arrayInputs['id'])->delete();
+        $this->comment->where('question_id', $arrayInputs['id'])->delete();
+        return redirect()->to('/question/mypage');
     }
 
     /**
@@ -147,4 +149,6 @@ class QuestionController extends Controller
         $this->comment->fill($validatedArrayInputs)->save();
         return redirect()->to('question/'.$validatedArrayInputs['question_id'].'/show');
     }
+
+
 }
