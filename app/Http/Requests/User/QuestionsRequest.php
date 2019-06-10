@@ -23,12 +23,11 @@ class QuestionsRequest extends FormRequest
      */
     public function rules()
     {
-        //
-    }
-
-    public function messages()
-    {
-        //
+        return [
+            'tag_category_id' => 'required',
+            'title' => 'required',
+            'content' => 'required'
+        ];
     }
 }
 

@@ -45,6 +45,7 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::get('question/create', ['as' => 'question.create', 'uses' => 'QuestionController@create']);
     Route::get('question/{id}', ['as' => 'question.show', 'uses' => 'QuestionController@show']);
     Route::get('question/{id}/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@myPage']);
+    Route::post('question/create', ['as' => 'question.store', 'uses' => 'QuestionController@store']);
 
 });
 

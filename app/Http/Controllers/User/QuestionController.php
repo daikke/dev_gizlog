@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\QuestionsRequest;
 use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -51,7 +53,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('user.question.create');
+        $objectTagCategories = $this->tagCategory->all();
+        return view('user.question.create', compact('objectTagCategories'));
     }
 
     /**
@@ -60,9 +63,12 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionsRequest $request)
     {
-        //
+        $validatedArrayInputs = $request->validated();
+        $validatedArrayInputs['user_id'] = Auth::id();
+        $this->question->fill($validatedArrayInputs)->save();
+        return redirect()->to('/question');
     }
 
     /**
