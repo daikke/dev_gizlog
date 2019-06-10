@@ -4,10 +4,22 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\TagCategory;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public $question;
+    public $tagCategory;
+    public $comment;
+
+    public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
+    {
+        $this->question = $question;
+        $this->tagCategory = $tagCategory;
+        $this->comment = $comment;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +27,23 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('user.question.index');
+        $objectTagCategories = $this->tagCategory->all();
+        $objectQuestions = $this->question->all();
+        return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
     }
-
+    /**
+     * Display a listing of the searched resouce.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $arrayInputs = $request->all();
+        $objectTagCategories = $this->tagCategory->all();
+        $objectQuestions = $this->question->searchQuestions($arrayInputs);
+        return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +51,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.question.create');
     }
 
     /**
@@ -47,7 +73,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return view('user.question.show');
     }
 
     /**
@@ -82,5 +108,10 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         //
+    }
+
+    public function myPage($userId)
+    {
+        return view('user.question.mypage');
     }
 }
