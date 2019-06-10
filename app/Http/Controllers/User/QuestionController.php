@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\QuestionsRequest;
+use App\Http\Requests\User\CommentRequest;
 use App\Models\Question;
 use App\Models\TagCategory;
 use App\Models\Comment;
@@ -65,7 +66,7 @@ class QuestionController extends Controller
      */
     public function store(QuestionsRequest $request)
     {
-        $validatedArrayInputs = $request->validated();
+        $validatedArrayInputs = $request->all();
         $validatedArrayInputs['user_id'] = Auth::id();
         $this->question->fill($validatedArrayInputs)->save();
         return redirect()->to('/question');
@@ -77,9 +78,10 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show($id)
     {
-        return view('user.question.show');
+        $objectSelectedQuestion = $this->question->find($id);
+        return view('user.question.show', compact('objectSelectedQuestion'));
     }
 
     /**
@@ -104,7 +106,7 @@ class QuestionController extends Controller
      */
     public function update(QuestionsRequest $request, $id)
     {
-        $validatedArrayInputs = $request->validated();
+        $validatedArrayInputs = $request->all();
         $this->question->find($id)->fill($validatedArrayInputs)->save();
         return redirect()->to('/question/mypage');
     }
@@ -121,10 +123,28 @@ class QuestionController extends Controller
         dd('successdelete'.$inputs['id']);
     }
 
+    /**
+     * Display a listing of user's questions.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function myPage()
     {
         $userId = Auth::id();
         $objectQuestions = $this->question->fetchUserQuestions($userId);
         return view('user.question.mypage', compact('objectQuestions'));
+    }
+
+    /**
+     * Store a newly created comment in storage.
+     *
+     * @param  \App\Http\Requests\User\CommentRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createComment(CommentRequest $request)
+    {
+        $validatedArrayInputs = $request->all();
+        $this->comment->fill($validatedArrayInputs)->save();
+        return redirect()->to('question/'.$validatedArrayInputs['question_id'].'/show');
     }
 }

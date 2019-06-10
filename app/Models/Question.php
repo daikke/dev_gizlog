@@ -26,7 +26,7 @@ class Question extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'question_id', 'id');
     }
 
     public function users()
