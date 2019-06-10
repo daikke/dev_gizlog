@@ -48,6 +48,7 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::post('question/create', ['as' => 'question.store', 'uses' => 'QuestionController@store']);
     Route::get('question/{id}/edit', ['as' => 'question.edit', 'uses' => 'QuestionController@edit']);
     Route::delete('question/delete', ['as' => 'question.destroy', 'uses' => 'QuestionController@destroy']);
+    Route::post('question/{id}/edit', ['as' => 'question.update', 'uses' => 'QuestionController@update']);
 });
 
 

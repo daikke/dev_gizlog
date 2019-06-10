@@ -60,7 +60,7 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\User\QuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(QuestionsRequest $request)
@@ -85,24 +85,28 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Question  $question
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        dd('successedit'.$id);
+        $objectTagCategories = $this->tagCategory->all();
+        $objectSearchedQuestion = $this->question->find($id);
+        return view('user.question.edit', compact('objectSearchedQuestion', 'objectTagCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Question  $question
+     * @param  \App\Http\Requests\User\QuestionsRequest  $request
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(QuestionsRequest $request, $id)
     {
-        //
+        $validatedArrayInputs = $request->validated();
+        $this->question->find($id)->fill($validatedArrayInputs)->save();
+        return redirect()->to('/question/mypage');
     }
 
     /**
