@@ -19,7 +19,10 @@ class Question extends Model
         'content',
     ];
 
-    protected $date = ['deleted_at'];
+    protected $date = [
+        'deleted_at',
+        'created_at',
+    ];
 
     public function comments()
     {
@@ -43,6 +46,11 @@ class Question extends Model
             $query = $query->where('tag_category_id', $arrayInputs['tag_category_id']);
         }
         return $query->get();
+    }
+
+    public function fetchUserQuestions($userId)
+    {
+        return $this->where('user_id', $userId)->get();
     }
 }
 

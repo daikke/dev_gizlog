@@ -88,9 +88,9 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit($id)
     {
-        //
+        dd('successedit'.$id);
     }
 
     /**
@@ -111,13 +111,16 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request)
     {
-        //
+        $inputs = $request->all();
+        dd('successdelete'.$inputs['id']);
     }
 
-    public function myPage($userId)
+    public function myPage()
     {
-        return view('user.question.mypage');
+        $userId = Auth::id();
+        $objectQuestions = $this->question->fetchUserQuestions($userId);
+        return view('user.question.mypage', compact('objectQuestions'));
     }
 }
