@@ -28,25 +28,14 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $objectTagCategories = $this->tagCategory->all();
-        $objectQuestions = $this->question->all();
-        return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
-    }
-    /**
-     * Display a listing of the searched resouce.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $arrayInputs = $request->all();
         $objectTagCategories = $this->tagCategory->all();
         $objectQuestions = $this->question->searchQuestions($arrayInputs);
         return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
     }
+
     /**
      * Show the form for creating a new resource.
      *

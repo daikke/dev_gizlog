@@ -41,9 +41,18 @@ class Question extends Model
 
     public function searchQuestions($arrayInputs)
     {
-        $query = $this->where('title', 'like', '%'.$arrayInputs['search_word'].'%');
-        if ($arrayInputs['tag_category_id']){
-            $query = $query->where('tag_category_id', $arrayInputs['tag_category_id']);
+        $query = $this;
+        if ($arrayInputs) {
+            $searchWord = $arrayInputs['search_word'];
+            $tagCategoryId = $arrayInputs['tag_category_id'];
+            if($searchWord && $tagCategoryId) {
+                $query = $query->where('tag_category_id', $tagCategoryId)
+                               ->where('title', 'like', '%'.$searchWord.'%');
+            } elseif($searchWord && !$tagCategoryId) {
+                $query = $query->where('title', 'like', '%'.$searchWord.'%');
+            } elseif(!$searchWord && $tagCategoryId) {
+                $query = $query->where('tag_category_id', $tagCategoryId);
+            }
         }
         return $query->get();
     }
