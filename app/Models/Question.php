@@ -24,19 +24,19 @@ class Question extends Model
         'created_at',
     ];
 
-    public function comments()
+    public function comment()
     {
-        return $this->hasMany(Comment::class, 'question_id', 'id');
+        return $this->hasMany(Comment::class);
     }
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function tagCategories()
+    public function tagCategory()
     {
-        return $this->hasMany(TagCategory::class, 'id', 'tag_category_id');
+        return $this->belongsTo(TagCategory::class);
     }
 
     public function searchQuestions($arrayInputs)

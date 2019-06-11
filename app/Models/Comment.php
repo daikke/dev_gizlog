@@ -21,8 +21,8 @@ class Comment extends Model
         'created_at',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 }
