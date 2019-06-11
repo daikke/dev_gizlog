@@ -56,9 +56,8 @@ class QuestionController extends Controller
     public function store(QuestionsRequest $request)
     {
         $validatedArrayInputs = $request->all();
-        $validatedArrayInputs['user_id'] = Auth::id();
-        $this->question->fill($validatedArrayInputs)->save();
-        return redirect()->to('/question');
+        $redirectPath = $this->question->storeQuestion($validatedArrayInputs);
+        return redirect()->to($redirectPath);
     }
 
     /**
@@ -84,20 +83,6 @@ class QuestionController extends Controller
         $objectTagCategories = $this->tagCategory->all();
         $objectSearchedQuestion = $this->question->find($id);
         return view('user.question.edit', compact('objectSearchedQuestion', 'objectTagCategories'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\User\QuestionsRequest  $request
-     * @param  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(QuestionsRequest $request, $id)
-    {
-        $validatedArrayInputs = $request->all();
-        $this->question->find($id)->fill($validatedArrayInputs)->save();
-        return redirect()->to('/question/mypage');
     }
 
     /**

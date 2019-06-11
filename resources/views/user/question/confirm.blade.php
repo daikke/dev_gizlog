@@ -28,6 +28,9 @@
       <input name="title" type="hidden" value="{{ $arrayInputs['title'] }}">
       <input name="content" type="hidden" value="{{ $arrayInputs['content'] }}">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+      @if(isset($arrayInputs['id']))
+        {{ Form::input('hidden', 'id', $arrayInputs['id']) }}
+      @endif
     {{ Form::close() }}
   </div>
 </div>

@@ -5,7 +5,7 @@
 
 <div class="main-wrap">
   <div class="container">
-    {{ Form::open(['route' => ['question.update', $objectSearchedQuestion->id]]) }}
+    {{ Form::open(['route' => 'question.confirm']) }}
       <div class="form-group">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
           @foreach ($objectTagCategories as $objectTagCategory)
@@ -23,6 +23,7 @@
         <span class="help-block">{{ $errors->first('content') }}</span>
       </div>
       <input name="confirm" class="btn btn-success pull-right" type="submit" value="update">
+      {{ Form::input('hidden', 'id', $objectSearchedQuestion->id) }}
     {{ Form::close() }}
   </div>
 </div>

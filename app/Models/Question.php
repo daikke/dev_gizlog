@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\TagCategory;
@@ -60,6 +61,20 @@ class Question extends Model
     public function fetchUserQuestions($userId)
     {
         return $this->where('user_id', $userId)->get();
+    }
+
+    public function storeQuestion($validatedArrayInputs)
+    {
+        $query = $this;
+        if(isset($validatedArrayInputs['id'])) {
+            $redirectPath = '/question/mypage';
+            $query = $query->find($validatedArrayInputs['id']);
+        } else {
+            $redirectPath = '/question';
+            $validatedArrayInputs['user_id'] = Auth::id();
+        }
+        $query->fill($validatedArrayInputs)->save();
+        return $redirectPath;
     }
 }
 
