@@ -138,7 +138,12 @@ class QuestionController extends Controller
         $this->comment->fill($validatedArrayInputs)->save();
         return redirect()->to('question/'.$validatedArrayInputs['question_id'].'/show');
     }
-
+    /**
+     * Display a confirm of create question.
+     *
+     * @param  \App\Http\Requests\User\QuestionsRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function confirm(QuestionsRequest $request)
     {
         $arrayInputs = $request->all();
