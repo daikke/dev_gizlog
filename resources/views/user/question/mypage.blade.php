@@ -20,9 +20,9 @@
         @foreach ($objectQuestions as $objectQuestion)
         <tr class="row">
           <td class="col-xs-2">{{ $objectQuestion->created_at->format('Y-m-d') }}</td>
-          <td class="col-xs-1">{{ $objectQuestion->tagCategories->first()->name }}</td>
+          <td class="col-xs-1">{{ $objectQuestion->tagCategory->name }}</td>
           <td class="col-xs-5">{{ $objectQuestion->title }}</td>
-          <td class="col-xs-2">{{ $objectQuestion->comments->count() }}<span class="point-color"></span></td>
+          <td class="col-xs-2">{{ $objectQuestion->comment->count() }}<span class="point-color"></span></td>
           <td class="col-xs-1">
             <a class="btn btn-success" href="{{ route('question.edit', ['id' => $objectQuestion->id]) }}">
               <i class="fa fa-pencil" aria-hidden="true"></i>

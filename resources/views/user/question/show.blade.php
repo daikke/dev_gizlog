@@ -5,8 +5,8 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      <img src="{{ $objectSelectedQuestion->users->first()->avatar }}" class="avatar-img">
-      <p>&nbsp;{{ $objectSelectedQuestion->users->first()->name }}さんの質問&nbsp;&nbsp;(&nbsp;{{ $objectSelectedQuestion->tagCategories->first()->name }}&nbsp;)</p>
+      <img src="{{ $objectSelectedQuestion->user->avatar }}" class="avatar-img">
+      <p>&nbsp;{{ $objectSelectedQuestion->user->name }}さんの質問&nbsp;&nbsp;(&nbsp;{{ $objectSelectedQuestion->tagCategory->name }}&nbsp;)</p>
       <p class="question-date">{{ $objectSelectedQuestion->created_at }}</p>
     </div>
     <div class="table-responsive">
@@ -18,18 +18,18 @@
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{{ $objectSelectedQuestion->content }}</td>
+            <td class='td-text'>{!! nl2br($objectSelectedQuestion->content) !!}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
     <div class="comment-list">
-      @foreach ($objectSelectedQuestion->comments as $comment)
+      @foreach ($objectSelectedQuestion->comment as $comment)
         <div class="comment-wrap">
           <div class="comment-title">
-            <img src="{{ $comment->users->first()->avatar }}" class="avatar-img">
-            <p>{{ $comment->users->first()->name }}</p>
+            <img src="{{ $comment->user->avatar }}" class="avatar-img">
+            <p>{{ $comment->user->name }}</p>
             <p class="comment-date">{{ $comment->created_at->format('Y-m-d H:i') }}</p>
           </div>
           <div class="comment-body">{{ $comment->comment }}</div>
