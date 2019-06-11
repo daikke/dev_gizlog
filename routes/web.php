@@ -42,9 +42,10 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::resource('report', DailyReportController::class);
     Route::get('question', ['as' => 'question.index', 'uses' => 'QuestionController@index']);
     Route::get('question/create', ['as' => 'question.create', 'uses' => 'QuestionController@create']);
+    Route::post('question/create', ['as' => 'question.confirm', 'uses' => 'QuestionController@confirm']);
+    Route::post('question/store', ['as' => 'question.store', 'uses' => 'QuestionController@store']);
     Route::get('question/{id}/show', ['as' => 'question.show', 'uses' => 'QuestionController@show']);
     Route::get('question/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@myPage']);
-    Route::post('question/create', ['as' => 'question.store', 'uses' => 'QuestionController@store']);
     Route::get('question/{id}/edit', ['as' => 'question.edit', 'uses' => 'QuestionController@edit']);
     Route::delete('question/delete', ['as' => 'question.destroy', 'uses' => 'QuestionController@destroy']);
     Route::post('question/{id}/edit', ['as' => 'question.update', 'uses' => 'QuestionController@update']);

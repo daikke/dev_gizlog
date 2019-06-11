@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public $question;
-    public $tagCategory;
-    public $comment;
+    protected $question;
+    protected $tagCategory;
+    protected $comment;
 
     public function __construct(Question $question, TagCategory $tagCategory, Comment $comment)
     {
@@ -139,5 +139,12 @@ class QuestionController extends Controller
         return redirect()->to('question/'.$validatedArrayInputs['question_id'].'/show');
     }
 
-
+    public function confirm(QuestionsRequest $request)
+    {
+        $arrayInputs = $request->all();
+        $arrayInputs['tag_category_name'] = $this->tagCategory
+                                                 ->find($arrayInputs['tag_category_id'])
+                                                 ->name;
+        return view('user.question.confirm', compact('arrayInputs'));
+    }
 }
