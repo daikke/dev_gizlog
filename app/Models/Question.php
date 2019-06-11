@@ -46,12 +46,12 @@ class Question extends Model
         if ($arrayInputs) {
             $searchWord = $arrayInputs['search_word'];
             $tagCategoryId = $arrayInputs['tag_category_id'];
-            if($searchWord && $tagCategoryId) {
+            if ($searchWord && $tagCategoryId) {
                 $query = $query->where('tag_category_id', $tagCategoryId)
                                ->where('title', 'like', '%'.$searchWord.'%');
-            } elseif($searchWord && !$tagCategoryId) {
+            } elseif ($searchWord && !$tagCategoryId) {
                 $query = $query->where('title', 'like', '%'.$searchWord.'%');
-            } elseif(!$searchWord && $tagCategoryId) {
+            } elseif (!$searchWord && $tagCategoryId) {
                 $query = $query->where('tag_category_id', $tagCategoryId);
             }
         }
@@ -66,7 +66,7 @@ class Question extends Model
     public function storeQuestion($validatedArrayInputs)
     {
         $query = $this;
-        if(isset($validatedArrayInputs['id'])) {
+        if (isset($validatedArrayInputs['id'])) {
             $redirectPath = '/question/mypage';
             $query = $query->find($validatedArrayInputs['id']);
         } else {
