@@ -67,13 +67,9 @@ class Question extends Model
         return $query->get();
     }
 
-    public function storeQuestion($validatedInputs)
+    public function storeQuestion($validatedInputs, $id)
     {
-        $query = $this;
-        if (isset($validatedInputs['id'])) {
-            $query = $query->find($validatedInputs['id']);
-        }
-        $query->fill($validatedInputs)->save();
+        $this->updateOrCreate(['id' => $id], $validatedInputs);
     }
 }
 

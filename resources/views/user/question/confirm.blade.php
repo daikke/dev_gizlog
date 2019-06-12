@@ -23,16 +23,14 @@
   </div>
   <div class="btn-bottom-wrapper">
     {{ Form::open(['route' => 'question.store'])}}
-      <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
       <input name="tag_category_id" type="hidden" value="{{ $validatedInputs['tag_category_id'] }}">
       <input name="title" type="hidden" value="{{ $validatedInputs['title'] }}">
       <input name="content" type="hidden" value="{{ $validatedInputs['content'] }}">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
       @if(isset($validatedInputs['id']))
-        {{ Form::input('hidden', 'id', $validatedInputs['id']) }}
-        {{ Form::input('hidden', 'redirectPath', route('question.mypage')) }}
+        {{ Form::input('hidden', 'redirectRoute', 'question.mypage') }}
       @else
-        {{ Form::input('hidden', 'redirectPath', route('question.index')) }}
+        {{ Form::input('hidden', 'redirectRoute', 'question.index') }}
       @endif
     {{ Form::close() }}
   </div>
