@@ -129,7 +129,7 @@ class QuestionController extends Controller
     {
         $validatedArrayInputs = $request->all();
         $this->comment->fill($validatedArrayInputs)->save();
-        return redirect()->to('question/'.$validatedArrayInputs['question_id'].'/show');
+        return redirect()->to(route('question.show', ['id' => $validatedArrayInputs['question_id']]));
     }
     /**
      * Display a confirm of create question.
