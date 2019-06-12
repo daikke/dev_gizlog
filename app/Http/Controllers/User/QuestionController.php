@@ -54,9 +54,9 @@ class QuestionController extends Controller
      */
     public function store(QuestionsRequest $request)
     {
+        $redirectPath = $request->input('redirectPath');
         $validatedInputs = $request->all();
         $this->question->storeQuestion($validatedInputs);
-        $redirectPath = $request->input('redirectPath');
         return redirect()->to($redirectPath);
     }
 

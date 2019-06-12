@@ -69,11 +69,9 @@ class Question extends Model
 
     public function storeQuestion($validatedInputs)
     {
-        $query = $this->newQuery();
+        $query = $this;
         if (isset($validatedInputs['id'])) {
             $query = $query->find($validatedInputs['id']);
-        } else {
-            $validatedInputs['user_id'] = Auth::id();
         }
         $query->fill($validatedInputs)->save();
     }
