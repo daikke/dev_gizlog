@@ -30,6 +30,9 @@
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
       @if(isset($validatedInputs['id']))
         {{ Form::input('hidden', 'id', $validatedInputs['id']) }}
+        {{ Form::input('hidden', 'redirectPath', route('question.mypage')) }}
+      @else
+        {{ Form::input('hidden', 'redirectPath', route('question.index')) }}
       @endif
     {{ Form::close() }}
   </div>

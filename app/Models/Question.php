@@ -69,16 +69,13 @@ class Question extends Model
 
     public function storeQuestion($validatedInputs)
     {
-        $query = $this;
+        $query = $this->newQuery();
         if (isset($validatedInputs['id'])) {
-            $redirectPath = '/question/mypage';
             $query = $query->find($validatedInputs['id']);
         } else {
-            $redirectPath = '/question';
             $validatedInputs['user_id'] = Auth::id();
         }
         $query->fill($validatedInputs)->save();
-        return $redirectPath;
     }
 }
 
