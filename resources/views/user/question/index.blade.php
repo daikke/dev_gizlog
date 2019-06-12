@@ -14,7 +14,7 @@
       </a>
     </div>
     <div class="category-wrap">
-      <div class="btn all" id="0">all</div>
+      <div class="btn all">all</div>
       @foreach ($objectTagCategories as $objectTagCategory)
         <div class="btn {{ $objectTagCategory->name }}" id="{{ $objectTagCategory->id }}">{{ $objectTagCategory->name }}</div>
       @endforeach
