@@ -5,27 +5,27 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      <img src="{{ $objectSelectedQuestion->user->avatar }}" class="avatar-img">
-      <p>&nbsp;{{ $objectSelectedQuestion->user->name }}さんの質問&nbsp;&nbsp;(&nbsp;{{ $objectSelectedQuestion->tagCategory->name }}&nbsp;)</p>
-      <p class="question-date">{{ $objectSelectedQuestion->created_at }}</p>
+      <img src="{{ $selectedQuestion->user->avatar }}" class="avatar-img">
+      <p>&nbsp;{{ $selectedQuestion->user->name }}さんの質問&nbsp;&nbsp;(&nbsp;{{ $selectedQuestion->tagCategory->name }}&nbsp;)</p>
+      <p class="question-date">{{ $selectedQuestion->created_at }}</p>
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text">{{ $objectSelectedQuestion->title }}</td>
+            <td class="td-text">{{ $selectedQuestion->title }}</td>
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{!! nl2br($objectSelectedQuestion->content) !!}</td>
+            <td class='td-text'>{!! nl2br($selectedQuestion->content) !!}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
     <div class="comment-list">
-      @foreach ($objectSelectedQuestion->comment as $comment)
+      @foreach ($selectedQuestion->comment as $comment)
         <div class="comment-wrap">
           <div class="comment-title">
             <img src="{{ $comment->user->avatar }}" class="avatar-img">
@@ -39,7 +39,7 @@
   <div class="comment-box">
     {{ Form::open(['route' => 'question.createComment']) }}
       <input name="user_id" type="hidden" value="{{ Auth::id() }}">
-      <input name="question_id" type="hidden" value="{{ $objectSelectedQuestion->id }}">
+      <input name="question_id" type="hidden" value="{{ $selectedQuestion->id }}">
       <div class="comment-title">
         <img src="" class="avatar-img"><p>コメントを投稿する</p>
       </div>

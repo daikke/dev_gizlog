@@ -30,9 +30,9 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $objectTagCategories = $this->tagCategory->all();
-        $objectQuestions = $this->question->searchQuestions($request);
-        return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
+        $tagCategories = $this->tagCategory->all();
+        $questions = $this->question->searchQuestions($request);
+        return view('user.question.index', compact('tagCategories', 'questions'));
     }
 
     /**
@@ -42,8 +42,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $objectTagCategories = $this->tagCategory->all();
-        return view('user.question.create', compact('objectTagCategories'));
+        $tagCategories = $this->tagCategory->all();
+        return view('user.question.create', compact('tagCategories'));
     }
 
     /**
@@ -54,8 +54,8 @@ class QuestionController extends Controller
      */
     public function store(QuestionsRequest $request)
     {
-        $validatedArrayInputs = $request->all();
-        $redirectPath = $this->question->storeQuestion($validatedArrayInputs);
+        $validatedInputs = $request->all();
+        $redirectPath = $this->question->storeQuestion($validatedInputs);
         return redirect()->to($redirectPath);
     }
 
@@ -67,8 +67,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $objectSelectedQuestion = $this->question->find($id);
-        return view('user.question.show', compact('objectSelectedQuestion'));
+        $selectedQuestion = $this->question->find($id);
+        return view('user.question.show', compact('selectedQuestion'));
     }
 
     /**
@@ -79,9 +79,9 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $objectTagCategories = $this->tagCategory->all();
-        $objectSearchedQuestion = $this->question->find($id);
-        return view('user.question.edit', compact('objectSearchedQuestion', 'objectTagCategories'));
+        $tagCategories = $this->tagCategory->all();
+        $searchedQuestion = $this->question->find($id);
+        return view('user.question.edit', compact('searchedQuestion', 'tagCategories'));
     }
 
     /**
@@ -105,8 +105,8 @@ class QuestionController extends Controller
     public function myPage()
     {
         $userId = Auth::id();
-        $objectQuestions = $this->question->fetchUserQuestions($userId)->get();
-        return view('user.question.mypage', compact('objectQuestions'));
+        $questions = $this->question->fetchUserQuestions($userId)->get();
+        return view('user.question.mypage', compact('questions'));
     }
 
     /**
@@ -117,9 +117,9 @@ class QuestionController extends Controller
      */
     public function createComment(CommentRequest $request)
     {
-        $validatedArrayInputs = $request->all();
-        $this->comment->fill($validatedArrayInputs)->save();
-        return redirect()->to(route('question.show', ['id' => $validatedArrayInputs['question_id']]));
+        $validatedInputs = $request->all();
+        $this->comment->fill($validatedInputs)->save();
+        return redirect()->to(route('question.show', ['id' => $validatedInputs['question_id']]));
     }
     /**
      * Display a confirm of create question.
@@ -129,10 +129,10 @@ class QuestionController extends Controller
      */
     public function confirm(QuestionsRequest $request)
     {
-        $arrayInputs = $request->all();
-        $arrayInputs['tag_category_name'] = $this->tagCategory
-                                                 ->find($arrayInputs['tag_category_id'])
+        $validatedInputs = $request->all();
+        $validatedInputs['tag_category_name'] = $this->tagCategory
+                                                 ->find($validatedInputs['tag_category_id'])
                                                  ->name;
-        return view('user.question.confirm', compact('arrayInputs'));
+        return view('user.question.confirm', compact('validatedInputs'));
     }
 }

@@ -8,22 +8,22 @@
     {{ Form::open(['route' => 'question.confirm']) }}
       <div class="form-group">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
-          @foreach ($objectTagCategories as $objectTagCategory)
-            <option value="{{ $objectTagCategory->id }}" {{ $objectTagCategory->id === $objectSearchedQuestion->tag_category_id ? 'selected' : '' }}>{{ $objectTagCategory->name }}</option>
+          @foreach ($tagCategories as $tagCategory)
+            <option value="{{ $tagCategory->id }}" {{ $tagCategory->id === $searchedQuestion->tag_category_id ? 'selected' : '' }}>{{ $tagCategory->name }}</option>
           @endforeach
         </select>
         <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
       </div>
       <div class="form-group">
-        <input class="form-control" placeholder="title" name="title" type="text" value="{{ $objectSearchedQuestion->title }}">
+        <input class="form-control" placeholder="title" name="title" type="text" value="{{ $searchedQuestion->title }}">
         <span class="help-block">{{ $errors->first('title') }}</span>
       </div>
       <div class="form-group">
-        <textarea class="form-control" placeholder="{{ $objectSearchedQuestion->content }}" name="content" cols="50" rows="10"></textarea>
+        <textarea class="form-control" placeholder="{{ $searchedQuestion->content }}" name="content" cols="50" rows="10"></textarea>
         <span class="help-block">{{ $errors->first('content') }}</span>
       </div>
       <input name="confirm" class="btn btn-success pull-right" type="submit" value="update">
-      {{ Form::input('hidden', 'id', $objectSearchedQuestion->id) }}
+      {{ Form::input('hidden', 'id', $searchedQuestion->id) }}
     {{ Form::close() }}
   </div>
 </div>

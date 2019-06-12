@@ -15,8 +15,8 @@
     </div>
     <div class="category-wrap">
       <div class="btn all">all</div>
-      @foreach ($objectTagCategories as $objectTagCategory)
-        <div class="btn {{ $objectTagCategory->name }}" id="{{ $objectTagCategory->id }}">{{ $objectTagCategory->name }}</div>
+      @foreach ($tagCategories as $tagCategory)
+        <div class="btn {{ $tagCategory->name }}" id="{{ $tagCategory->id }}">{{ $tagCategory->name }}</div>
       @endforeach
       <input id="category-val" name="tag_category_id" type="hidden" value="">
     </div>
@@ -33,14 +33,14 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($objectQuestions as $objectQuestion)
+        @foreach ($questions as $question)
         <tr class="row">
-          <td class="col-xs-1"><img src="{{ $objectQuestion->user->avatar }}" class="avatar-img"></td>
-          <td class="col-xs-2">{{ $objectQuestion->tagCategory->name }}</td>
-          <td class="col-xs-6">{{ $objectQuestion->title }}</td>
-          <td class="col-xs-1">{{ $objectQuestion->comment->count() }}<span class="point-color"></span></td>
+          <td class="col-xs-1"><img src="{{ $question->user->avatar }}" class="avatar-img"></td>
+          <td class="col-xs-2">{{ $question->tagCategory->name }}</td>
+          <td class="col-xs-6">{{ $question->title }}</td>
+          <td class="col-xs-1">{{ $question->comment->count() }}<span class="point-color"></span></td>
           <td class="col-xs-2">
-            <a class="btn btn-success" href="{{ route('question.show', ['id' => $objectQuestion->id]) }}">
+            <a class="btn btn-success" href="{{ route('question.show', ['id' => $question->id]) }}">
               <i class="fa fa-comments-o" aria-hidden="true"></i>
             </a>
           </td>

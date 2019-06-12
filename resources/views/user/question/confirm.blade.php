@@ -4,18 +4,18 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      {{ $arrayInputs['tag_category_name'] }}の質問
+      {{ $validatedInputs['tag_category_name'] }}の質問
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text">{{ $arrayInputs['title'] }}</td>
+            <td class="td-text">{{ $validatedInputs['title'] }}</td>
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{!! nl2br($arrayInputs['content']) !!}</td>
+            <td class='td-text'>{!! nl2br($validatedInputs['content']) !!}</td>
           </tr>
         </tbody>
       </table>
@@ -24,12 +24,12 @@
   <div class="btn-bottom-wrapper">
     {{ Form::open(['route' => 'question.store'])}}
       <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
-      <input name="tag_category_id" type="hidden" value="{{ $arrayInputs['tag_category_id'] }}">
-      <input name="title" type="hidden" value="{{ $arrayInputs['title'] }}">
-      <input name="content" type="hidden" value="{{ $arrayInputs['content'] }}">
+      <input name="tag_category_id" type="hidden" value="{{ $validatedInputs['tag_category_id'] }}">
+      <input name="title" type="hidden" value="{{ $validatedInputs['title'] }}">
+      <input name="content" type="hidden" value="{{ $validatedInputs['content'] }}">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-      @if(isset($arrayInputs['id']))
-        {{ Form::input('hidden', 'id', $arrayInputs['id']) }}
+      @if(isset($validatedInputs['id']))
+        {{ Form::input('hidden', 'id', $validatedInputs['id']) }}
       @endif
     {{ Form::close() }}
   </div>

@@ -8,8 +8,8 @@
       <div class="form-group">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id="pref_id">
           <option value="">Select category</option>
-            @foreach ($objectTagCategories as $objectTagCategory)
-              <option value= "{{ $objectTagCategory->id }}">{{ $objectTagCategory->name }}</option>
+            @foreach ($tagCategories as $tagCategory)
+              <option value= "{{ $tagCategory->id }}">{{ $tagCategory->name }}</option>
             @endforeach
         </select>
         <span class="help-block">{{ $errors->first('tag_category_id') }}</span>

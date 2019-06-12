@@ -67,17 +67,17 @@ class Question extends Model
         return $query->get();
     }
 
-    public function storeQuestion($validatedArrayInputs)
+    public function storeQuestion($validatedInputs)
     {
         $query = $this;
-        if (isset($validatedArrayInputs['id'])) {
+        if (isset($validatedInputs['id'])) {
             $redirectPath = '/question/mypage';
-            $query = $query->find($validatedArrayInputs['id']);
+            $query = $query->find($validatedInputs['id']);
         } else {
             $redirectPath = '/question';
-            $validatedArrayInputs['user_id'] = Auth::id();
+            $validatedInputs['user_id'] = Auth::id();
         }
-        $query->fill($validatedArrayInputs)->save();
+        $query->fill($validatedInputs)->save();
         return $redirectPath;
     }
 }
