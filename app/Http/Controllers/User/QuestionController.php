@@ -97,7 +97,7 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Question  $question
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
