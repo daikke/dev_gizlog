@@ -40,27 +40,31 @@ class Question extends Model
         return $this->belongsTo(TagCategory::class);
     }
 
-    public function searchQuestions($arrayInputs)
+    public function scopeSearchCategory($query, $tagCategoryId)
     {
-        $query = $this;
-        if ($arrayInputs) {
-            $searchWord = $arrayInputs['search_word'];
-            $tagCategoryId = $arrayInputs['tag_category_id'];
-            if ($searchWord && $tagCategoryId) {
-                $query = $query->where('tag_category_id', $tagCategoryId)
-                               ->where('title', 'like', '%'.$searchWord.'%');
-            } elseif ($searchWord && !$tagCategoryId) {
-                $query = $query->where('title', 'like', '%'.$searchWord.'%');
-            } elseif (!$searchWord && $tagCategoryId) {
-                $query = $query->where('tag_category_id', $tagCategoryId);
-            }
-        }
-        return $query->get();
+        return $query->where('tag_category_id', $tagCategoryId);
     }
 
-    public function fetchUserQuestions($userId)
+    public function scopeSearchKeywords($query, $keywords)
     {
-        return $this->where('user_id', $userId)->get();
+        return $query->where('title', 'like', '%' . $keywords . '%');
+    }
+
+    public function scopeFetchUserQuestions($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
+
+    public function searchQuestions($request)
+    {
+        $query = $this->newQuery();
+        if ($request->filled('tag_category_id')) {
+            $query->searchCategory($request->input('tag_category_id'));
+        }
+        if ($request->filled('search_word')) {
+            $query->searchKeywords($request->input('search_word'));
+        }
+        return $query->get();
     }
 
     public function storeQuestion($validatedArrayInputs)

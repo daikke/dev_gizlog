@@ -30,18 +30,8 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $arrayInputs = $request->all();
         $objectTagCategories = $this->tagCategory->all();
-
-
-
-        $objectQuestions = $this->question->searchQuestions($arrayInputs);
-
-
-
-        //$objectQuestions = $this->question->searchQuestions($request->all());
-
-
+        $objectQuestions = $this->question->searchQuestions($request);
         return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
     }
 
@@ -115,7 +105,7 @@ class QuestionController extends Controller
     public function myPage()
     {
         $userId = Auth::id();
-        $objectQuestions = $this->question->fetchUserQuestions($userId);
+        $objectQuestions = $this->question->fetchUserQuestions($userId)->get();
         return view('user.question.mypage', compact('objectQuestions'));
     }
 
