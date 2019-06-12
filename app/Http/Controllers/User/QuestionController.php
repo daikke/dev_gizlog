@@ -32,7 +32,16 @@ class QuestionController extends Controller
     {
         $arrayInputs = $request->all();
         $objectTagCategories = $this->tagCategory->all();
+
+
+
         $objectQuestions = $this->question->searchQuestions($arrayInputs);
+
+
+
+        //$objectQuestions = $this->question->searchQuestions($request->all());
+
+
         return view('user.question.index', compact('objectTagCategories', 'objectQuestions'));
     }
 
@@ -91,11 +100,10 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $arrayInputs = $request->all();
-        $this->question->find($arrayInputs['id'])->delete();
-        $this->comment->where('question_id', $arrayInputs['id'])->delete();
+        $this->question->find($id)->delete();
+        $this->comment->where('question_id', $id)->delete();
         return redirect()->to('/question/mypage');
     }
 

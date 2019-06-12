@@ -47,7 +47,7 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::get('question/{id}/show', ['as' => 'question.show', 'uses' => 'QuestionController@show']);
     Route::get('question/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@myPage']);
     Route::get('question/{id}/edit', ['as' => 'question.edit', 'uses' => 'QuestionController@edit']);
-    Route::delete('question/delete', ['as' => 'question.destroy', 'uses' => 'QuestionController@destroy']);
+    Route::delete('question/{id}', ['as' => 'question.destroy', 'uses' => 'QuestionController@destroy']);
     Route::post('question/comment', ['as' => 'question.createComment', 'uses' => 'QuestionController@createComment']);
 });
 
