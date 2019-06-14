@@ -40,14 +40,18 @@ class Question extends Model
         return $this->belongsTo(TagCategory::class);
     }
 
-    public function scopeSearchCategory($query, $tagCategoryId)
+    public function scopeSearchCategory($query, $inputs)
     {
-        return $query->where('tag_category_id', $tagCategoryId);
+        if (!empty($inputs['tag_category_id'])) {
+            return $query->where('tag_category_id', $inputs['tag_category_id']);
+        }
     }
 
-    public function scopeSearchKeywords($query, $keywords)
+    public function scopeSearchKeywords($query, $inputs)
     {
-        return $query->where('title', 'like', '%' . $keywords . '%');
+        if (!empty($inputs['search_word'])) {
+            return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+        }
     }
 
     public function scopeFetchUserQuestions($query, $userId)
@@ -55,16 +59,11 @@ class Question extends Model
         return $query->where('user_id', $userId);
     }
 
-    public function searchQuestions($request)
+    public function searchQuestions($inputs)
     {
-        $query = $this->newQuery();
-        if ($request->filled('tag_category_id')) {
-            $query->searchCategory($request->input('tag_category_id'));
-        }
-        if ($request->filled('search_word')) {
-            $query->searchKeywords($request->input('search_word'));
-        }
-        return $query->get();
+        return $this->searchCategory($inputs)
+                    ->searchKeywords($inputs)
+                    ->get();
     }
 
     public function storeQuestion($validatedInputs, $id)
